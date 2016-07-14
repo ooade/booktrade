@@ -1,22 +1,31 @@
-import { Template } from 'meteor/templating';
-import { ReactiveVar } from 'meteor/reactive-var';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 
-import './main.html';
+import App from './components/app';
+import Landing from './components/landing';
+import SignIn from './components/accounts/signin';
+import SignUp from './components/accounts/signup';
+import SignOut from './components/accounts/signout';
+import AllBooks from './components/allbooks';
+import MyBooks from './components/mybooks';
+import Home from './components/home';
+import RequireAuth from './components/auth/require_auth';
 
-Template.hello.onCreated(function helloOnCreated() {
-  // counter starts at 0
-  this.counter = new ReactiveVar(0);
-});
+const routes = (
+  <Router history={browserHistory}>
+    <Route path="/" component={App}>
+      <IndexRoute component={Landing} />
+      <Route path="/signin" component={SignIn} />
+      <Route path="/signup" component={SignUp} />
+      <Route path="/signout" component={SignOut} />
+      <Route path="/home" component={RequireAuth(Home)} />
+      <Route path="/allbooks" component={RequireAuth(AllBooks)} />
+      <Route path="/mybooks" component={RequireAuth(MyBooks)} />
+    </Route>
+  </Router>
+);
 
-Template.hello.helpers({
-  counter() {
-    return Template.instance().counter.get();
-  },
-});
-
-Template.hello.events({
-  'click button'(event, instance) {
-    // increment the counter when button is clicked
-    instance.counter.set(instance.counter.get() + 1);
-  },
+Meteor.startup(() => {
+  ReactDOM.render(routes, document.querySelector('#app'));
 });

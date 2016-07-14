@@ -1,1 +1,60 @@
-/* CSS declarations go here */
+.login-link-text {
+  color: #e96656;
+  text-decoration: none !important;
+}
+
+.login-link-text:hover {
+  color: #e96656;
+}
+
+.navbar-brand {
+  color: #fff !important;
+  font-weight: bold;
+  font-size: 14px;
+  text-transform: capitalize;
+}
+
+.center {
+  text-align: center;
+}
+
+.col-xs-6 {
+  padding: 2em;
+  font-size: 18px;
+  height: auto;
+  vertical-align: middle !important;
+  margin-bottom: 1em;
+}
+
+.nav > li {
+  color: #fff;
+}
+
+.nav > li:hover {
+  background-color: #000;
+}
+
+.login-form {
+  margin-top: 7em;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+  border: 1px solid #eee;
+  padding: 3em;
+}
+
+.login-form h4 {
+  font-weight: bold;
+}
+
+.list-group {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  margin: 10px;
+}
+
+.list-group-item {
+  margin: 2px;
+  justify-content: space-around;
+}
