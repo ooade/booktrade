@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import ShowBooks from './showbooks';
+import TradeRequests from './requests';
 
 const API_KEY = 'AIzaSyByTrUxFetKLr04s88TCOESt1WVyu9nGDs';
 
@@ -21,15 +22,17 @@ class MyBooks extends Component {
 
           this.refs.bookname.value = "";
         })
-      });
+      })
+      .catch( error => {
+          // Network Error and Search Error
+        }
+      );
   }
 
   render() {
     return (
       <div className="my-books">
-        <div className="breadcrumb">
-          <h3>Request from Other users:</h3>
-        </div>
+        <TradeRequests />
         <div className="breadcrumb">
           <h3>My Books:</h3>
           <form className="form-inline" onSubmit={this.onBookSubmit.bind(this)}>

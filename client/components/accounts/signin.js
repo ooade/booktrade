@@ -31,7 +31,7 @@ class SignIn extends Component {
         return;
       }
 
-      browserHistory.push('/home');
+      browserHistory.push('/mybooks');
     })
   }
 

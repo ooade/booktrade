@@ -9,7 +9,6 @@ import SignUp from './components/accounts/signup';
 import SignOut from './components/accounts/signout';
 import AllBooks from './components/allbooks';
 import MyBooks from './components/mybooks';
-import Home from './components/home';
 import RequireAuth from './components/auth/require_auth';
 
 const routes = (
@@ -19,7 +18,6 @@ const routes = (
       <Route path="/signin" component={SignIn} />
       <Route path="/signup" component={SignUp} />
       <Route path="/signout" component={SignOut} />
-      <Route path="/home" component={RequireAuth(Home)} />
       <Route path="/allbooks" component={RequireAuth(AllBooks)} />
       <Route path="/mybooks" component={RequireAuth(MyBooks)} />
     </Route>

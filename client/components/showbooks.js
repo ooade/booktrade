@@ -12,6 +12,10 @@ class ShowBooks extends Component {
       return (
         <li className="list-group-item" key={book._id}>
           <img src={book.thumbnail} />
+          <button
+            className="btn btn-sm btn-danger"
+            onClick= { ()=> Meteor.call('book.remove', book) }
+            >x</button>
         </li>
       );
     });

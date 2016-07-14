@@ -33,7 +33,7 @@ export default class SignUp extends Component {
         return;
       }
 
-      browserHistory.push('/home');
+      browserHistory.push('/mybooks');
     });
   }
 

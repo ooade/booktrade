@@ -6,4 +6,8 @@ Meteor.startup(() => {
     return Books.find({ ownerId: this.userId });
   });
 
+  Meteor.publish('books', function() {
+    return Books.find();
+  });
+
 });
