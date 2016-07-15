@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import ShowBooks from './showbooks';
 import TradeRequests from './requests';
+import { Books } from '../../imports/collections/books';
+import { createContainer } from 'meteor/react-meteor-data';
 
 const API_KEY = 'AIzaSyByTrUxFetKLr04s88TCOESt1WVyu9nGDs';
 
@@ -42,10 +44,15 @@ class MyBooks extends Component {
             <button className="btn btn-primary" style={{marginLeft: 10}}>Add</button>
           </form>
         </div>
-        <ShowBooks />
+        <ShowBooks books={this.props.myBooks}/>
       </div>
     );
   }
 };
 
-export default MyBooks;
+export default createContainer(()=> {
+  Meteor.subscribe('books');
+  Meteor.subscribe('myBooks');
+
+  return { books: Books.find({}).fetch(),  myBooks: Books.find({ ownerId: Meteor.userId() }).fetch()}
+}, MyBooks);

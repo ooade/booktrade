@@ -2,36 +2,32 @@ import React, { Component } from 'react';
 import { createContainer } from 'meteor/react-meteor-data';
 import { Books } from '../../imports/collections/books';
 import OutRequests from './outRequests';
+import ReqApproved from './reqApproved';
+import Request4u from './tradeRequest';
+import RequestUA from './requestUApproved';
 
 class TradeRequests extends Component {
   componentDidMount() {
-    // $('.show-me').hide();
-  }
+    $('.outstanding, .reqApproved, .requestUApproved, .other-users').hide();
 
-  otherReq() {
-    return this.props.requestOthers.map(book => {
-      return (
-        <li className="list-group-item" key={book._id}>
-          {book.title}
-          <i className="glyphicon glyphicon-ok" onClick={()=> console.log("ewoo")} />
-          <i className="glyphicon glyphicon-remove" onClick={()=> console.log("ewoo")} />
-        </li>
-      );
+    $('.tr').click(() => {
+      $('.requestUApproved, .other-users').toggle();
+    });
+
+    $('.yr').click(() => {
+      $('.outstanding, .reqApproved').toggle();
     });
   }
 
   render() {
     return (
       <div className="trade-req breadcrumb">
-        <button className="btn btn-success">Your trade requests</button>
-        <button className="btn btn-primary" style={{marginLeft: 5}}>Trade Requests for you</button>
+        <button className="btn btn-success yr">Your trade requests</button>
+        <button className="btn btn-primary tr" style={{marginLeft: 5}}>Trade Requests for you ({this.props.requestOthers.length})</button>
         <OutRequests outstanding={this.props.outstanding}/>
-        <div className="other-users">
-          {this.props.requestOthers.length >= 1  && <h3>Trade requests for you:</h3>}
-          <ul className="list-group">
-            { this.otherReq() }
-          </ul>
-        </div>
+        <ReqApproved books={this.props.reqApproved} />
+        <Request4u books={this.props.requestOthers} />
+        <RequestUA books={this.props.requestUApproved} />
       </div>
     );
   }
@@ -41,7 +37,9 @@ export default createContainer(() => {
   const userId = Meteor.userId();
 
   return {
-    outstanding: Books.find({ requestedBy: userId }).fetch(),
-    requestOthers: Books.find({ ownerId: userId, requestedBy: { $nin: ["", null] } }).fetch()
+    outstanding: Books.find({ requestedBy: userId, purchased: false }).fetch(),
+    requestOthers: Books.find({ ownerId: userId, requestedBy: { $nin: ["", null] }, purchased: false }).fetch(),
+    requestUApproved: Books.find({ ownerId: userId, purchased: true }).fetch(),
+    reqApproved: Books.find({ requestedBy: userId, purchased: true }).fetch()
   }
 }, TradeRequests);

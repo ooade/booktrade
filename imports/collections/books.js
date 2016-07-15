@@ -24,6 +24,14 @@ Meteor.methods({
 
   'book.removeOutstanding': (book) => {
     return Books.update(book._id, { $set: { requestedBy: "" } });
+  },
+
+  'book.acceptTrade': (book) => {
+    return Books.update(book._id, { $set: { purchased: true } });
+  },
+
+  'book.unApprove': (book) => {
+    return Books.update(book._id, { $set: { purchased: false } });
   }
 });
 

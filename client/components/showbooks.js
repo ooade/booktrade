@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import { createContainer } from 'meteor/react-meteor-data';
-import { Books } from '../../imports/collections/books';
 
 class ShowBooks extends Component {
   renderList() {
@@ -32,8 +30,4 @@ class ShowBooks extends Component {
   }
 };
 
-export default createContainer(() => {
-  Meteor.subscribe('myBooks');
-
-  return { books: Books.find({}).fetch() }
-}, ShowBooks);
+export default ShowBooks;
