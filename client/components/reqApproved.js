@@ -5,6 +5,7 @@ export default (props) => {
     event.preventDefault();
 
     Meteor.call('book.removeOutstanding', book);
+    Meteor.call('book.unApprove', book);
   }
 
   const reqApproved = () => {
