@@ -6,7 +6,7 @@ export default class Landing extends Component {
     return (
       <div className="landing">
         <div className="jumbotron center landing-jumbo">
-          <h1>Booktrade</h1>
+          <h1>Realtime Booktrade</h1>
           <h3>Traders connect to readers. Readers connect to traders</h3>
         </div>
         <div className="container">
@@ -20,7 +20,7 @@ export default class Landing extends Component {
           </div>
           <div className="row">
             <div className="col-xs-6 center">
-              Request to borrow other user's books
+              Request to borrow other user's books in Realtime
             </div>
             <div className="col-xs-6 center">
               Easily manage books and request from your dashboard
