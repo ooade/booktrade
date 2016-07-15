@@ -20,6 +20,10 @@ Meteor.methods({
 
   'book.request': function(book) {
     return Books.update(book._id, { $set: { requestedBy: this.userId } });
+  },
+
+  'book.removeOutstanding': (book) => {
+    return Books.update(book._id, { $set: { requestedBy: "" } });
   }
 });
 

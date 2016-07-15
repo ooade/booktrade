@@ -1,16 +1,21 @@
 import React, { Component } from 'react';
 import { createContainer } from 'meteor/react-meteor-data';
 import { Books } from '../../imports/collections/books';
+import OutRequests from './outRequests';
 
 class TradeRequests extends Component {
   componentDidMount() {
     // $('.show-me').hide();
   }
 
-  outstandingReq() {
-    return this.props.outstanding.map(book => {
+  otherReq() {
+    return this.props.requestOthers.map(book => {
       return (
-        <span>{book.title}</span>
+        <li className="list-group-item" key={book._id}>
+          {book.title}
+          <i className="glyphicon glyphicon-ok" onClick={()=> console.log("ewoo")} />
+          <i className="glyphicon glyphicon-remove" onClick={()=> console.log("ewoo")} />
+        </li>
       );
     });
   }
@@ -20,9 +25,12 @@ class TradeRequests extends Component {
       <div className="trade-req breadcrumb">
         <button className="btn btn-success">Your trade requests</button>
         <button className="btn btn-primary" style={{marginLeft: 5}}>Trade Requests for you</button>
-        <div className="outstanding">
-          <h3>Your outstanding requests:</h3>
-          { this.outstandingReq() }
+        <OutRequests outstanding={this.props.outstanding}/>
+        <div className="other-users">
+          {this.props.requestOthers.length >= 1  && <h3>Trade requests for you:</h3>}
+          <ul className="list-group">
+            { this.otherReq() }
+          </ul>
         </div>
       </div>
     );
@@ -30,8 +38,10 @@ class TradeRequests extends Component {
 };
 
 export default createContainer(() => {
-  Meteor.subscribe('books');
   const userId = Meteor.userId();
 
-  return { outstanding: Books.find({ requestedBy: userId }).fetch() }
+  return {
+    outstanding: Books.find({ requestedBy: userId }).fetch(),
+    requestOthers: Books.find({ ownerId: userId, requestedBy: { $nin: ["", null] } }).fetch()
+  }
 }, TradeRequests);

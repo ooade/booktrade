@@ -58,3 +58,26 @@
   margin: 2px;
   justify-content: space-around;
 }
+
+.request-btn {
+  border-radius: 0px;
+  opacity: 0.5;
+}
+
+.glyphicon-remove {
+  color: red;
+}
+
+.glyphicon-ok {
+  color: green;
+}
+
+.glyphicon-remove, .glyphicon-ok  {
+  opacity: 0.4;
+  cursor: pointer;
+  margin-left: 5px;
+}
+
+.glyphicon-remove:hover, .glyphicon-ok:hover, .request-btn:hover  {
+  opacity: 0.8;
+}

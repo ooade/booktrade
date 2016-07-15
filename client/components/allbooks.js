@@ -19,7 +19,7 @@ class AllBooks extends Component {
       return (
         <li className="list-group-item" key={book._id}>
           <img src={book.thumbnail} />
-          { book.ownerId !== this.props.userId && book.requestedBy === "" && <button onClick={this.onRequest.bind(this, book)} className="btn btn-sm btn-block btn-success"> Request </button>}
+          { book.ownerId !== this.props.userId && book.requestedBy === "" && <button onClick={this.onRequest.bind(this, book)} className="btn btn-sm btn-block btn-success request-btn"> Request </button>}
         </li>
       );
     });
